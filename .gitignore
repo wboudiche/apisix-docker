@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+./package
+!compose/apisix_log/.gitkeep
+.env
+*.log
+docker-compose.override.yml
