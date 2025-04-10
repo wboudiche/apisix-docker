@@ -9,8 +9,6 @@ At present, APISIX has been used in various industries, including NASA, Tencent 
 
 ## How to run Apache APISIX docker compose
 
-cd example
-
 docker compose up -d
 
 ## License
