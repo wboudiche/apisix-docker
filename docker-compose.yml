@@ -32,6 +32,8 @@ services:
       - "9091:9091/tcp"
       - "9443:9443/tcp"
       - "9092:9092/tcp"
+    extra_hosts:
+      - "auth.example.com:172.20.0.10"
     networks:
       apisix:
 
@@ -108,9 +110,24 @@ services:
     networks:
       apisix:
 
+  lemonldap-ng:
+    image: coudot/lemonldap-ng
+    container_name: lemonldap-ng
+    ports:
+      - "80:80"  # Assuming LemonLDAP::NG is running on port 80 inside the container
+    volumes:
+      -  "./llng_conf/lmConf-1.json:/var/lib/lemonldap-ng/conf/lmConf-1.json"
+    restart: always
+    networks:
+      apisix:
+        ipv4_address: 172.20.0.10
+
 networks:
   apisix:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
 
 volumes:
   etcd_data:
